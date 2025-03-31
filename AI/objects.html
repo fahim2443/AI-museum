@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Objects</title>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.1.0"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.3/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #00008b; /* Dark blue background */
+        }
+
+        model-viewer {
+            border: 2px solid #800080; /* Purple border */
+            box-shadow: 0 0 20px 5px #800080; /* Glowing effect */
+        }
+
+        .container {
+            background-color: #ffffff; /* White background for 3D model and text sections */
+            border-radius: 8px; /* Optional: Add rounded corners for better aesthetics */
+            padding: 16px; /* Optional: Add padding for spacing */
+        }
+    </style>
+    <script>
+        function toggleLanguage() {
+            const chineseTexts = document.querySelectorAll('.lang-chinese');
+            const englishTexts = document.querySelectorAll('.lang-english');
+            chineseTexts.forEach(el => el.classList.toggle('hidden'));
+            englishTexts.forEach(el => el.classList.toggle('hidden'));
+        }
+    </script>
+</head>
+
+<body>
+    <!-- Button to toggle language -->
+    <div class="container mx-auto py-4 text-center">
+        <button onclick="toggleLanguage()" class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-700">
+            English <-> Chinese
+        </button>
+    </div>
+
+    <!-- Container for the 3D Model and Description -->
+    <div class="container mx-auto py-16 px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <!-- Left side: 3D Model -->
+            <div class="flex justify-center items-center">
+                <model-viewer src="assets/big.glb" alt="3D Model" auto-rotate camera-controls class="w-full h-96 border-2 border-black"></model-viewer>
+            </div>
+
+            <!-- Right side: Description -->
+            <div class="flex flex-col justify-center">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">青花塔 (Porcelain Pagoda)</h2>
+                <p class="lang-chinese text-lg text-gray-700 mb-4">
+                    大报恩寺琉璃塔：明成祖恩赐<br><br>
+
+                    🏰 大报恩寺琉璃塔的拱门，1958年在南京中华门外琉璃窑旧址被发现，当时只是一堆残缺的琉璃塔砖件，釉面斑驳。经过精心组装和复原，才得以重现昔日风采。整座塔上五颜六色的琉璃在阳光下闪闪发光，可惜的是，由于战争和动乱，如今只剩下这一套完整的拱门。<br><br>
+
+                    🔮 拱门构件采用高低温釉两次烧造而成，样式繁多，是明代琉璃技术的集大成者。虽然琉璃塔经历了战争的洗礼，最终留给世人的只有南京博物院珍藏的这套完整的“大报恩寺琉璃塔拱门”。但琉璃塔的形象早在19世纪就为外国人所熟知，被认为是世界中古时期的七大奇迹之一。<br><br>
+
+                    🏞️ 大报恩寺琉璃塔共九级八面，通体琉璃，反映了当时大明朝的建筑技术与建筑成就。塔高二十四丈六尺一寸九分，每一层有8个拱券门，九层宝塔除去首层，共有六十四套拱门，每套拱门还烧造了两套备件，总共烧制了一百九十二套华丽的琉璃拱门。此外，每一个拱门的两侧各有一扇小窗户，每扇窗户后面都有一盏长明灯，共一百四十四盏长明灯，当时由百位僧人负责维护，以保证长明灯的不灭。每当夜幕降临，琉璃塔上的长明灯就会亮起，彻夜不熄。<br><br>
+
+                    🏛️ 大报恩寺琉璃塔修建于明朝定都南京期间，历经三代皇帝修了十七年。总设计师是明成祖朱棣，他想报父母恩、报天下恩，决意要建一座通体琉璃的天下第一塔。但在修建过程中，经费不够了，于是郑和被调到南京，调用了下西洋贸易的最后一笔百万银两，并带着他下西洋的一万名水兵参与了琉璃塔的修建。郑和花了六年时间修建琉璃塔，出钱出人，为最后琉璃塔的完工起到了决定性的作用。之后南京有了这座童话般的琉璃塔，使得在明清时代，南京大报恩寺成了欧洲人到中国的必游之地。<br><br>
+
+                    🏰 明成祖朱棣夺取皇位巩固政权后，明朝在这个时间范围内非常强大，既有郑和下西洋的壮举，也有北修故宫南修武当的奇迹。而琉璃塔的匠人们也用“三绝”坐实了第一塔的名声——第一绝高耸云日，第二绝通体琉璃，第三绝佛灯永明——这三绝将琉璃塔推向了中国古代宝塔艺术的最高峰。
+                </p>
+                <p class="lang-english text-lg text-gray-700 mb-4 hidden">
+                    Big Guanyin Temple's Glass Tower: Granted by Emperor Chengzu of the Ming Dynasty<br><br>
+
+                    🏰The arch of the glazed pagoda of the Great Bellen Temple was discovered in 1958 at the site of the glazed kiln outside the southern gate of Nanjing. At that time, it was just a pile of broken glazed pagoda bricks with mottled glaze. After careful assembly and restoration, it could be restored to its former glory. The colorful glazed tiles on the entire pagoda shone in the sunlight, but unfortunately, due to war and turmoil, only this set of complete arches remains today.<br><br>
+
+                    🔮The arch components were made by firing twice at high and low temperatures, and there are many styles. It is the epitome of the Ming Dynasty's glazed tile technology. Although the glazed pagoda has undergone the test of war, the only thing left for the world is the complete set of glazed pagoda arches preserved by the Nanjing Museum. However, the image of the glazed pagoda was known to foreigners as early as the 19th century and was considered one of the Seven Wonders of the Medieval World.<br><br>
+
+                    🏞️The nine-story, eight-sided glazed pagoda of the Great Bellen Temple is entirely made of glazed tiles, reflecting the architectural techniques and achievements of the Great Ming Dynasty. The tower is 24.6 feet tall, with 8 arched doors on each level. Including the first level, there are a total of 64 sets of arched doors on the nine-story pagoda. Each set of arched doors also has two spare sets, making a total of 192 sets of magnificent glazed arched doors. In addition, there are two small windows on each side of each arched door, with a long-burning lamp behind each window. There are a total of 144 long-burning lamps, which were maintained by 100 monks to ensure that the lamps did not go out. At night, the long-burning lamps on the glazed pagoda would light up and burn all night.<br><br>
+
+                    🏛️The Big Bell Tower of the Temple of Great Compassion was built during the Ming Dynasty when Nanjing was the capital, and it took 17 years to complete under the reign of three emperors. The chief designer was Emperor Zhu Di of the Ming Dynasty, who wanted to repay his parents' kindness and the kindness of the world, and decided to build the world's first tower made entirely of glass. However, during the construction process, the funds were insufficient, so Zheng He was transferred to Nanjing, and the last million taels of silver from the trade with Western countries were used. He also brought 10,000 sailors from his trade with Western countries to participate in the construction of the glass tower. Zheng He spent six years building the glass tower, and his money and people played a decisive role in the completion of the glass tower. After that, Nanjing had this fairy-tale glass tower, which made the Temple of Great Compassion in Nanjing a must-visit place for Europeans when they came to China during the Ming and Qing Dynasties.<br><br>
+
+                    🏰After Emperor Zhu Di of the Ming Dynasty took the throne and consolidated his power, the Ming Dynasty was very powerful during this period. There were both Zheng He's voyages to the West and the miracles of repairing the Forbidden City in the north and Wudang Mountain in the south. The craftsmen of the crystal pagoda also solidified the first pagoda's fame with the "Three Wonders": the first wonder was high above the clouds and the sun, the second wonder was entirely made of crystal, and the third wonder was the eternal light of Buddha lamps. These three wonders pushed the crystal pagoda to the pinnacle of ancient Chinese pagoda art.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="container mx-auto py-16 px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <!-- Left side: 3D Model -->
+            <div class="flex justify-center items-center">
+                <model-viewer src="assets/goat.glb" alt="3D Model" auto-rotate camera-controls class="w-full h-96 border-2 border-black"></model-viewer>
+            </div>
+
+            <!-- Right side: Description -->
+            <div class="flex flex-col justify-center">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">犀尊 (Xizun)</h2>
+                <p class="lang-chinese text-lg text-gray-700 mb-4">
+                    犀尊是一种古代中国青铜礼器，形状像一种动物，通常被解释为犀牛或类似的动物。它属于周朝（公元前1046年–公元前256年）的青铜器，通常用于与祖先崇拜和仪式相关的仪式场合。<br><br>
+
+                    主要特点：<br>
+                        •	形状和设计：犀尊是一种礼器，呈现出动物形态，通常被认为是犀牛，尽管具体的解释可能有所不同。器物的设计非常精美，上面有许多典型的周朝青铜器图案，展现了极高的工艺水平和艺术价值。<br>
+                        •	用途：像许多其他青铜礼器一样，犀尊很可能用于祭祀和祖先崇拜仪式。这些器物被认为具有象征意义，用于向祖先或神灵献上食物或饮品. <br>
+                        •	材质与工艺：犀尊由青铜制成，这是周朝时期常见的礼器材质。器表通常装饰有复杂的图案，如饕餮纹（一种神话动物面具）和几何图案，这些装饰特征也反映了那个时期的艺术风格。<br><br>
+                    
+                    历史与文化背景：<br><br>
+                    
+                    周朝是青铜铸造技术发展的黄金时期，犀尊等青铜器是祭祀活动中的重要物品。这些器物的用途不仅仅是实用工具，它们在象征性上具有深远的意义，连接着生者与祖先的灵魂。
+                </p>
+                <p class="lang-english text-lg text-gray-700 mb-4 hidden">
+                    The Xizun is an ancient Chinese bronze ritual vessel shaped like an animal, typically interpreted as a rhinoceros or a similar beast. It is part of the Zhou Dynasty (1046 BCE – 256 BCE) bronzes and was typically used in ritual ceremonies related to ancestor worship.<br><br>
+
+                    Key Features:<br>
+	                •	Shape and Design: The Xizun is a ritual vessel with an animal-shaped form, often resembling a rhinoceros, though interpretations can vary. The vessel has an intricate and ornate design, with decorative patterns typical of Zhou bronzes, demonstrating high craftsmanship and artistic value.<br>
+	                •	Usage: Like many other ritual bronzes, the Xizun was likely used in ritual offerings and ancestor worship ceremonies. These vessels were believed to carry symbolic significance, used for presenting food or drink as offerings to ancestors or deities.<br>
+	                •	Material and Techniques: Made of bronze, a common material for ritual vessels during the Zhou period. The surface often features decorative patterns like the taotie (a mythical animal mask) and geometric motifs, which are typical of the era’s artistry.<br><br>
+
+                    Historical and Cultural Context:<br><br>
+
+                    The Zhou Dynasty is known for its advances in bronze casting techniques, and vessels like the Xizun were among the most important items in ritual practices. These vessels were not only practical tools but also held deep symbolic value, connecting the living with the spirits of the ancestors.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="container mx-auto py-16 px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <!-- Left side: 3D Model -->
+            <div class="flex justify-center items-center">
+                <model-viewer src="assets/pot.glb" alt="3D Model" auto-rotate camera-controls class="w-full h-96 border-2 border-black"></model-viewer>
+            </div>
+
+            <!-- Right side: Description -->
+            <div class="flex flex-col justify-center">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">鼎 (Ding)</h2>
+                <p class="lang-chinese text-lg text-gray-700 mb-4">
+                    中国青铜鼎（鼎）是中国古代青铜器中非常重要且具有象征意义的器物，主要出现在商朝（约公元前1600年–公元前1046年）和周朝（约公元前1046年–公元前256年）。鼎是一种三足的青铜器，通常用于烹饪、宗教仪式以及作为权力和威严的象征。<br><br>
+
+                    鼎的主要特点：<br>
+	                    1.	设计：<br>
+	                    •	鼎是三足鼎立的青铜器，通常具有三条支脚，支脚将器物抬离地面。<br>
+	                    •	鼎通常有两个把手，用于便于携带。<br>
+	                    •	鼎的主体通常装饰有精美的祭祀图案，如饕餮（神秘的动物面具）、动物形象和几何图案，反映了商周时期的工艺水平。<br>
+	                    2.	材质：<br>
+	                    •	鼎主要由青铜制成，青铜在古代中国被认为是一种耐用且能保持热量的贵重材料。制作工艺使用了分模铸造或失蜡铸造等先进的铸造技术。<br>
+	                    3.	用途：<br>
+	                    •	鼎通常用于祭祀烹饪和供奉。在祭祀活动中，食物（通常是肉类）会在鼎中烹煮，并作为献祭品供奉给祖先或神灵。这与古代中国的祖先崇拜和宗教信仰密切相关。<br>
+	                    •	祭祀象征：鼎也是权力和威严的象征。在周朝，拥有大鼎的国君被认为有更强的政治和军事力量，鼎的数量是衡量统治者权力的重要标准。<br>
+	                    4.	文化意义：<br>
+	                    •	鼎在古代中国社会中具有高度象征意义。在周朝，拥有鼎被视为合法统治的标志。甚至有一句话：“拥有鼎者，拥有天命”，意指持有鼎的统治者被认为拥有**“天命”**的授权。<br>
+	                    •	政治象征：朝代更替时，鼎的交接成为一种象征性的事件。例如，周朝推翻了商朝，而这一权力转移的标志之一便是鼎的转交。<br>
+	                    5.	大小与种类：<br>
+	                    •	鼎有不同的尺寸，较小的用于家庭祭祀，而较大的则用于国王或国家仪式。<br>
+	                    •	一些大型鼎的重量可达数吨，最著名的鼎包括与周朝国王相关的**“三鼎”**。<br>
+	                    6.	著名的鼎：<br>
+	                    •	宋鼎：一件重要的周朝鼎，以其巨大尺寸和精美工艺而著称。<br>
+	                    •	伏羲鼎：与中国神话中的伏羲帝相关的鼎，是极具历史意义的文物。<br>
+	                    •	武王鼎：一件重要的鼎，和周朝的开国皇帝武王有关。<br><br>
+
+                        考古发现：<br>
+	                    •	许多鼎在中国各地的墓葬和考古遗址中被发现。这些发现为我们提供了关于古代中国宗教和政治活动的珍贵信息。鼎常被视为国家宝藏，并在中国国内外的博物馆中展出。<br><br>
+
+                        遗产：<br>
+	                    •	鼎的遗产不仅体现在它的历史和宗教意义上，而且作为中国文化的象征，鼎广泛出现在中国的艺术、文学和象征符号中。在现代，鼎仍然具有重要的文化价值，并且在中国的政治文化中，鼎常常被用作权力与传统的象征。
+                </p>
+                <p class="lang-english text-lg text-gray-700 mb-4 hidden">
+                    The Chinese Bronze Tripod Cauldron (known as Ding 鼎 in Chinese) is a significant and symbolic piece of ancient Chinese bronze ware, mainly from the Shang Dynasty (c. 1600–1046 BCE) and the Zhou Dynasty (c. 1046–256 BCE). The Ding is a tripod vessel made of bronze, traditionally used for cooking, religious rituals, and as a symbol of power and authority.<br><br>
+
+                    Key Features of the Ding:<br>
+	                1.	Design:<br>
+	                •	The Ding is a tripod vessel with three legs, elevating the vessel off the ground.<br>
+	                •	It typically has two handles for carrying convenience.<br>
+	                •	The body of the Ding is often decorated with intricate ritual designs, such as taotie (a mythical animal mask motif), animal figures, and geometric patterns, reflecting the high craftsmanship of the Shang and Zhou periods.<br>
+	                2.	Material:<br>
+	                •	The Ding is primarily made of bronze, a highly prized material in ancient China for its durability and ability to hold heat. The casting techniques used in making the Ding include piece-mold casting and lost-wax casting.<br>
+	                3.	Function:<br>
+	                •	The Ding was primarily used for ritual cooking and offerings. In rituals, food (usually meat) was cooked in the Ding and offered to ancestors or deities. This was tied to ancestor worship, a central aspect of ancient Chinese religion and culture.<br>
+	                •	Ritual Significance: The Ding was also a symbol of authority. In the Zhou Dynasty, the possession of large Dings was considered a mark of the ruler’s power. The number of Dings a ruler possessed was believed to represent their political and military strength.<br>
+	                4.	Cultural Importance:<br>
+	                •	The Ding held great symbolic value in ancient Chinese society. During the Zhou Dynasty, the possession of a Ding was considered a mark of legitimate rule. There is a famous saying: “He who possesses the Ding, possesses the Mandate of Heaven,” signifying that the ruler who held the Ding had the divine right to govern.<br>
+	                •	Political Symbolism: The transition of power between dynasties was often marked by the handing over of the Ding. The Zhou Dynasty overthrew the Shang Dynasty, and the transfer of the Ding symbolized this power shift.<br>
+	                5.	Size and Varieties:<br>
+	                •	The Ding came in various sizes. Smaller ones were used for domestic rituals, while larger ones were used for royal or state ceremonies.<br>
+	                •	Some large Dings could weigh several tons, and the most famous examples are the “Three Dings” associated with the rulers of the Zhou Dynasty.<br>
+	                6.	Famous Dings:<br>
+	                •	The Song Ding: An important Ding from the Zhou period, known for its impressive size and craftsmanship.<br>
+	                •	The Fuxi Ding: A famous Ding associated with the mythical Chinese emperor Fuxi.<br>
+	                •	The Ding of King Wu: A highly significant artifact related to the founder of the Zhou Dynasty, King Wu.<br><br>
+
+                    Archaeological Discovery:<br>
+	                •	Numerous Dings have been found in tombs and archaeological sites across China. These discoveries provide valuable insight into the religious and political practices of ancient Chinese societies. The Ding is often regarded as a national treasure and is displayed in museums both in China and internationally.<br><br>
+
+                    Legacy:<br>
+	                •	The legacy of the Ding extends beyond its historical and religious significance. It is widely regarded as a symbol of Chinese culture and appears frequently in Chinese art, literature, and symbolism. In modern times, the Ding remains a cultural icon, sometimes referenced in Chinese politics and culture as a symbol of power and tradition.
+                </p>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D AI Model & Chatbot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="https://unpkg.com/@google/model-viewer@latest"></script>
+</head>
+<body class="bg-white text-black dark:bg-gray-900 dark:text-gray-100">
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md p-4 flex justify-between items-center dark:bg-gray-800">
+        <h1 class="text-2xl font-bold">3D AI Model & Chatbot</h1>
+        <ul class="flex space-x-4">
+            <li><a href="home.html" class="hover:text-purple-500 text-lg px-3">Home</a></li>
+        </ul>
+    </nav>
+
+    <!-- 3D Model and Chatbot Section -->
+    <section class="container mx-auto py-12 px-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- 3D Model Container -->
+        <div class="bg-blue-100 p-8 rounded-lg shadow-md text-black dark:bg-gray-900 dark:text-gray-100 flex flex-col md:flex-row items-center md:items-start border-4 border-purple-500 hover:shadow-purple-500 hover:shadow-lg transition-all duration-300 ease-in-out">
+            <div class="md:w-1/2 text-center md:text-left mt-4 md:mt-0 md:pl-6">
+                <h3 class="text-xl font-bold">Explore the 3D Model</h3>
+                <p class="mt-2">Interact with an ancient artifact in 3D.</p>
+            </div>
+            <div class="w-full md:w-1/2 border-4 border-pink-500 shadow-lg shadow-pink-500 rounded-lg">
+                <model-viewer id="avatar" src="assets/test2.glb" alt="Placeholder 3D Model" auto-rotate camera-controls animation-name="Idle" class="w-full h-auto min-h-[300px] md:h-[500px]" autoplay></model-viewer>
+            </div>
+        </div>
+
+        <!-- AI Chatbot -->
+        <div class="bg-blue-900 p-8 rounded-lg shadow-md text-white text-center flex flex-col h-full">
+            <h3 class="text-xl font-bold text-lg">AI Chatbot Guide</h3>
+            <p class="mt-2 text-lg">Ask questions about the museum and its history.</p>
+            <div id="chatbox-container" class="flex-grow mt-4 border p-4 h-64 overflow-auto">
+                <div id="chatbox" class="text-left text-sm text-white"></div>
+            </div>
+            <div id="chat-input" class="flex items-center border-t border-white mt-2">
+                <input type="file" id="photoUpload" accept="image/*" class="hidden" multiple onchange="previewImages(event)">
+                <label class="cursor-pointer bg-blue-900 text-white px-3 py-2 border-r border-white" onclick="openModal()">+</label>
+                <input type="text" id="userInput" placeholder="Ask me anything..." class="w-full p-3 text-black pr-12 rounded-lg border border-gray-300" onkeydown="checkEnter(event)">
+                <button onclick="sendMessage()" class="bg-blue-700 text-white px-4 py-2 rounded-r border-l border-white hover:bg-blue-600">↑</button>
+            </div>
+            <!-- Multiple Image Preview -->
+            <div id="imagePreviewContainer" class="mt-2 hidden flex space-x-2"></div>
+        </div>
+    </section>
+
+    <div id="3d-objects-section" class="py-10 bg-white dark:bg-gray-900">
+      <h2 class="text-center text-2xl font-semibold text-gray-800 dark:text-gray-100">Explore 3D Objects</h2>
+      <div class="flex justify-center flex-wrap space-x-4 mt-6">
+        <!-- 3D Object 1 -->
+        <div class="object-container">
+          <img src="assets/gatepic.jpg" alt="3D Object 1" class="w-48 h-48 cursor-pointer hover:scale-105 transition duration-300" onclick="window.location.href='objects.html'">
+          <p class="text-center mt-2 text-gray-800 dark:text-gray-100">青花塔 (Porcelain Pagoda)</p>
+        </div>
+
+        <!-- 3D Object 2 -->
+        <div class="object-container">
+          <img src="assets/goatpic.jpg" alt="3D Object 2" class="w-48 h-48 cursor-pointer hover:scale-105 transition duration-300" onclick="window.location.href='objects.html'">
+          <p class="text-center mt-2 text-gray-800 dark:text-gray-100">犀尊 (Xizun)</p>
+        </div>
+
+        <!-- 3D Object 3 -->
+        <div class="object-container">
+          <img src="assets/pot.png" alt="3D Object 3" class="w-48 h-48 cursor-pointer hover:scale-105 transition duration-300" onclick="window.location.href='objects.html'">
+          <p class="text-center mt-2 text-gray-800 dark:text-gray-100">鼎 (Ding)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Image Upload Modal -->
+    <div id="imageUploadModal" class="hidden fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
+        <div class="bg-white p-8 rounded-lg shadow-lg text-center w-64">
+            <h3 class="text-xl font-bold text-black mb-4">Choose an Option</h3>
+            <button id="takePicture" class="bg-blue-600 text-white px-4 py-2 rounded mb-4 w-full hover:bg-blue-500" onclick="openCamera()">Take a Picture</button>
+            <button id="uploadPicture" class="bg-green-600 text-white px-4 py-2 rounded w-full hover:bg-green-500" onclick="openFilePicker()">Upload Picture</button>
+            <button onclick="closeModal()" class="bg-red-600 text-white px-4 py-2 rounded mt-4 w-full hover:bg-red-500">Cancel</button>
+        </div>
+    </div>
+
+    <!-- JavaScript for Chatbot -->
+    <script>
+        function openModal() {
+            document.getElementById("imageUploadModal").classList.remove("hidden");
+        }
+
+        function closeModal() {
+            document.getElementById("imageUploadModal").classList.add("hidden");
+        }
+
+        function openFilePicker() {
+            document.getElementById("photoUpload").click();
+            closeModal();
+        }
+
+        function openCamera() {
+            const fileInput = document.getElementById("photoUpload");
+            fileInput.setAttribute("capture", "camera");
+            fileInput.click();
+            closeModal();
+        }
+
+        function checkEnter(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+        
+        function scrollToBottom() {
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    const chatbox = document.getElementById("chatbox");
+                    if (chatbox) {
+                        chatbox.scrollTop = chatbox.scrollHeight;
+                    }
+                }, 50);
+            });
+        }
+
+        function playVoice(text) {
+            const API_KEY = "sk_79ca034fb18e875b69c2850c28a34608beea4b0c89e4f327"; // Replace with your actual API key
+            const ENGLISH_VOICE_ID = "ByhETIclHirOlWnWKhHc"; // English voice ID
+
+            if (!API_KEY) {
+                console.error("ElevenLabs API key is missing.");
+                return;
+            }
+
+            fetch(`https://api.elevenlabs.io/v1/text-to-speech/${ENGLISH_VOICE_ID}`, {
+                method: "POST",
+                headers: {
+                    "xi-api-key": API_KEY,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    text: text,
+                    model_id: "eleven_multilingual_v1"
+                })
+            })
+            .then(response => response.blob())
+            .then(blob => {
+                const audioURL = URL.createObjectURL(blob);
+                const audio = new Audio(audioURL);
+                audio.play();
+            })
+            .catch(error => {
+                console.error("Error generating speech:", error);
+            });
+        }
+
+        function syncLips(audio) {
+            const avatar = document.getElementById("avatar");
+            if (!avatar) return;
+
+            // Play speaking animation when audio starts
+            audio.onplay = () => {
+                avatar.animationName = "Talking"; // Replace with actual animation name
+            };
+
+            // Stop talking animation when speech ends
+            audio.onended = () => {
+                avatar.animationName = "Idle"; // Switch back to idle animation
+            };
+        }
+
+        // Add random gestures like head nodding
+        function addGestures() {
+            const avatar = document.getElementById("avatar");
+
+            const gestures = ["Idle", "HeadNod", "Wave", "LookAround"];
+            let gestureIndex = 0;
+
+            setInterval(() => {
+                avatar.animationName = gestures[gestureIndex];
+                gestureIndex = (gestureIndex + 1) % gestures.length;
+            }, 5000);
+        }
+        addGestures();
+
+        async function sendMessage() {
+            const inputText = document.getElementById("userInput").value.trim();
+            const chatbox = document.getElementById("chatbox");
+            const imagePreviewContainer = document.getElementById("imagePreviewContainer");
+            let base64Images = [];
+
+            if (imagePreviewContainer.children.length > 0) {
+                Array.from(imagePreviewContainer.children).forEach(child => {
+                    const img = child.querySelector("img");
+                    if (img) {
+                        base64Images.push(img.src);
+                    }
+                });
+                imagePreviewContainer.innerHTML = '';
+                imagePreviewContainer.classList.add("hidden");
+            }
+
+            let userMessage = `<div class="text-right"><strong>You:</strong> ${inputText || "[Image Sent]"}</div>`;
+            if (base64Images.length > 0) {
+                base64Images.forEach(src => {
+                    userMessage += `<div class="text-right mt-2"><img src="${src}" class="w-16 h-16 border rounded"></div>`;
+                });
+            }
+            chatbox.innerHTML += userMessage;
+            scrollToBottom();
+
+            if (!inputText && base64Images.length === 0) return;
+
+            chatbox.innerHTML += `<div id="loadingMessage" class="text-left p-2 bg-gray-700 rounded-lg"><strong>Bot:</strong> Typing...</div>`;
+            scrollToBottom();
+
+            try {
+                const apiKey = "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";
+                if (!apiKey) {
+                    alert("Please enter and save your API key first.");
+                    document.getElementById("loadingMessage").remove();
+                    return;
+                }
+
+                const apiResponse = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+                    method: "POST",
+                    headers: {
+                        "Authorization": `Bearer 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`,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        model: "deepseek/deepseek-r1:free",
+                        messages: [{ role: "user", content: inputText || "[Image Uploaded]" }],
+                        images: base64Images.length > 0 ? base64Images : undefined
+                    })
+                });
+
+                let responseData = await apiResponse.json();
+                let botMessage = responseData?.choices?.[0]?.message?.content || "No response from AI.";
+
+                document.getElementById("loadingMessage").remove();
+
+                if (!botMessage) {
+                    chatbox.innerHTML += `<div class="text-left text-red-500"><strong>Bot:</strong> No response from AI.</div>`;
+                } else {
+                    chatbox.innerHTML += `<div class="text-left p-2 bg-gray-700 rounded-lg"><strong>Bot:</strong> ${botMessage}</div>`;
+                    playVoice(botMessage);
+                }
+                scrollToBottom();
+            } catch (error) {
+                document.getElementById("loadingMessage").remove();
+                chatbox.innerHTML += `<div class="text-left text-red-500"><strong>Bot:</strong> Error communicating with AI.</div>`;
+            }
+
+            document.getElementById("userInput").value = "";
+            scrollToBottom();
+        }
+
+        function previewImages(event) {
+            const imagePreviewContainer = document.getElementById("imagePreviewContainer");
+            const fileInput = document.getElementById("photoUpload"); // Get file input
+            imagePreviewContainer.innerHTML = '';
+            Array.from(event.target.files).forEach((file, index) => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imgWrapper = document.createElement('div');
+                    imgWrapper.classList.add('relative', 'inline-block', 'w-16', 'h-16');
+
+                    const img = document.createElement('img');
+                    img.src = e.target.result; // Convert image to Base64
+                    img.classList.add('w-16', 'h-16', 'object-cover', 'rounded', 'border', 'border-gray-300');
+
+                    const closeButton = document.createElement('button');
+                    closeButton.innerHTML = '×';
+                    closeButton.classList.add('absolute', 'top-0', 'right-0', 'bg-red-500', 'text-white', 'rounded-full', 'w-5', 'h-5', 'flex', 'items-center', 'justify-center', 'text-xs', 'cursor-pointer');
+                    closeButton.onclick = function() {
+                        imgWrapper.remove(); // Remove the image preview
+                        if (!imagePreviewContainer.children.length) {
+                            imagePreviewContainer.classList.add("hidden");
+                        }
+                    };
+
+                    imgWrapper.appendChild(img);
+                    imgWrapper.appendChild(closeButton);
+                    imagePreviewContainer.appendChild(imgWrapper);
+                };
+                reader.readAsDataURL(file);
+            });
+            imagePreviewContainer.classList.remove('hidden');
+            fileInput.value = ""; // Reset file input to allow re-uploading
+        }
+    </script>
+
+</body>
+</html>
